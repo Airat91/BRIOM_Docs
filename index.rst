@@ -1,7 +1,8 @@
-.. only:: html
+Модули ввода-вывода «BRIOM»
+===========================
 
-   Модули ввода-вывода «BRIOM»
-   ===========================
+.. figure:: images/view.png
+   :width: 400
 
 .. toctree::
    :maxdepth: 2
@@ -9,6 +10,7 @@
    :hidden:
 
    briom_description
+   common_parameters
    interfaces
    exterior
 
