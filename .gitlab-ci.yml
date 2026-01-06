@@ -1,0 +1,30 @@
+stages:
+  - init_env
+  - make_html
+  - deploy
+
+Environment_installation:
+  stage: init_env
+  script:
+    - pip install sphinx==6.2.1
+    - pip install sphinx_rtd_theme==1.1.1
+
+HTML_compilation:
+  stage: make_html
+  script:
+    - sphinx-build -a ./ ./build/html
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: 30 days
+    paths:
+    - ./build/html/
+
+HTML_deployment:
+  stage: deploy
+  script:
+    - rm -f /var/www/bric_devices/bric_ai_16/ru/latest/*.*
+    - rm -rf /var/www/bric_devices/bric_ai_16/ru/latest/_static
+    - rm -rf /var/www/bric_devices/bric_ai_16/ru/latest/_sources
+    - rm -rf /var/www/bric_devices/bric_ai_16/ru/latest/_images
+    - cp -r ./build/html/* /var/www/bric_devices/bric_ai_16/ru/latest/
